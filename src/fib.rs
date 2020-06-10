@@ -7,6 +7,7 @@ fn helper(a: i64, b: i64, n: i64) -> i64 {
     }
 }
 
+/// Generate the nth fibonacci number.
 pub fn fib(n: i64) -> i64 {
     helper(0, 1, n)
 }
