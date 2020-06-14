@@ -1,3 +1,23 @@
+use std::collections::HashMap;
+
+
+fn fib_m(m: &mut HashMap<i64, i64>, n: i64) -> i64 {
+    if m.contains_key(&n) {
+        *m.get(&n).unwrap()
+    } else {
+        let res = fib_m(m, n - 1) + fib_m(m, n - 2);
+        m.insert(n, res);
+        res
+    }
+}
+
+/// Generate the nth fibonacci number with memoization.
+pub fn fib_mem(n: i64) -> i64 {
+    let mut m = HashMap::new();
+    m.insert(0, 0);
+    m.insert(1, 1);
+    fib_m(&mut m, n)
+}
 
 fn helper(a: i64, b: i64, n: i64) -> i64 {
     if n > 0 {
@@ -23,28 +43,33 @@ pub fn fib_no_tr(n: i64) -> i64 {
 #[cfg(test)]
 mod tests {
 
-    use crate::fib::{fib, fib_no_tr};
+    use crate::fib::{fib, fib_no_tr, fib_mem};
 
     #[test]
     fn fib0() {
         assert_eq!(0, fib(0));
         assert_eq!(0, fib_no_tr(0));
+        assert_eq!(0, fib_mem(0));
     }
 
     #[test]
     fn fib1() {
         assert_eq!(1, fib(1));
         assert_eq!(1, fib_no_tr(1));
+        assert_eq!(1, fib_mem(1));
+
     }
 
     #[test]
     fn fib10() {
         assert_eq!(55, fib(10));
         assert_eq!(55, fib_no_tr(10));
+        assert_eq!(55, fib_mem(10));
     }
 
     #[test]
     fn fib250() {
         assert_eq!(12586269025, fib(50));
+        assert_eq!(12586269025, fib_mem(50));
     }
 }
