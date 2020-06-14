@@ -19,6 +19,7 @@ pub fn fib_mem(n: i64) -> i64 {
     fib_m(&mut m, n)
 }
 
+/// Generate the nth fibonacci number with iteration.
 pub fn fib_iter(n: i64) -> i64 {
     if n == 0 {
         return n;
