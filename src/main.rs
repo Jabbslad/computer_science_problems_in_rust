@@ -1,4 +1,5 @@
 mod fib;
+mod compression;
 
 use fib::fib;
 
