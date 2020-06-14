@@ -1,3 +1,20 @@
+type BitPair = (bool, bool);
+
+pub fn compress2(s: String) -> Vec<BitPair> {
+    let mut v: Vec<BitPair>  = Vec::new();
+        for c in s.chars() {
+        match c {
+            'A' => v.push((false, false)),
+            'B' => v.push((false, true)),
+            'C' => v.push((true, false)),
+            'D' => v.push((true, true)),
+            _ => panic!("invalid Nucleotide"),
+        }
+    }
+    v
+}
+
+
 pub fn compress(s: String) -> String {
     let mut res: i16 = 1;
     for c in s.chars() {
@@ -15,8 +32,13 @@ pub fn compress(s: String) -> String {
 
 #[cfg(test)]
 mod tests {
-
     use super::*;
+
+    #[test]
+    fn test_bit() {
+        let expected = vec![(false, false), (false, true), (true, false), (true, true)];
+        assert_eq!(expected, compress2("ABCD".to_owned()));
+    }
 
     #[test]
     fn is_empty() {
