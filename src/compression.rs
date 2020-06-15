@@ -14,6 +14,19 @@ pub fn compress2(s: String) -> Vec<BitPair> {
     v
 }
 
+pub fn decompress(v: &Vec<BitPair>) -> String {
+    let mut s: String = String::new();
+    for &bp in v {
+        match &bp {
+            (false, false) => s.push('A'),
+            (false, true) => s.push('B'),
+            (true, false) => s.push('C'),
+            (true, true) => s.push('D'),
+        }
+    }
+    s
+}
+
 
 pub fn compress(s: String) -> String {
     let mut res: i16 = 1;
@@ -36,8 +49,14 @@ mod tests {
 
     #[test]
     fn test_bit() {
-        let expected = vec![(false, false), (false, true), (true, false), (true, true)];
+        let expected = vec![(false, false), (false, true), (true, false), (true, true)]; 
         assert_eq!(expected, compress2("ABCD".to_owned()));
+    }
+
+    #[test]
+    fn test_decompress() {
+        let v = vec![(false, false), (false, true), (true, false), (true, true)];
+        assert_eq!("ABCD".to_owned(), decompress(&v));
     }
 
     #[test]
