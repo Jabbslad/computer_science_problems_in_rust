@@ -1,5 +1,6 @@
 mod fib;
 mod compression;
+mod encryption;
 
 use fib::fib;
 
