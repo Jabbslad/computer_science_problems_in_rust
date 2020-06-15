@@ -27,7 +27,7 @@ pub fn fib_iter(n: i64) -> i64 {
     let mut last = 0;
     let mut next = 1;
     for _ in 1..n {
-        let mut tmp = last;
+        let tmp = last;
         last = next;
         next = tmp + next
     }
